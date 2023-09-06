@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        // Header bar
         appBar: AppBar(
           title: Text('Mindful Task Pro'),
           // Add a hamburger icon button to open the drawer
