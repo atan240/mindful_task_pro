@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindful_task_pro/constants/colors.dart';
 
+// Screens
 import 'package:mindful_task_pro/screens/Home.dart';
 import 'package:mindful_task_pro/screens/MyLists.dart';
 import 'package:mindful_task_pro/screens/Timer.dart';
@@ -10,6 +12,7 @@ import 'package:mindful_task_pro/screens/Login.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));
 }
@@ -31,7 +34,20 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Mindful Task Pro'),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(),
+              Container(
+                height: 40,
+                width: 40,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset('assets/images/blank_user.jpg')),
+              )
+            ],
+          ),
+          // Text('Mindful Task Pro'),
           // Add a hamburger icon button to open the drawer
           leading: Builder(
             builder: (context) => IconButton(
