@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:mindful_task_pro/screens/Home.dart';
 import 'package:mindful_task_pro/screens/MyLists.dart';
-import 'package:mindful_task_pro/screens/Timer.dart';
+import 'package:mindful_task_pro/screens/MyTimer.dart';
+import 'package:mindful_task_pro/screens/MyTimer.dart';
 import 'package:mindful_task_pro/screens/Calendar.dart';
 import 'package:mindful_task_pro/screens/Accomplishments.dart';
 import 'package:mindful_task_pro/screens/Login.dart';
@@ -24,12 +25,13 @@ class _MyAppState extends State<MyApp> {
   final screens = [
     Home(),
     MyLists(),
-    Timer(),
+    MyTimer(),
     Calendar(),
   ];
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        // Header bar
         appBar: AppBar(
           title: Text('Mindful Task Pro'),
           // Add a hamburger icon button to open the drawer
