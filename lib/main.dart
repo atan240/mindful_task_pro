@@ -28,9 +28,10 @@ class _MyAppState extends State<MyApp> {
     Calendar(),
   ];
 
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        // Header bar
         appBar: AppBar(
           title: Text('Mindful Task Pro'),
           // Add a hamburger icon button to open the drawer
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        
 
         // Add a Drawer for the navigation drawer
         drawer: Drawer(
@@ -124,4 +126,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       );
+ 
+  
 }
+
