@@ -26,55 +26,83 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      // return Center(
-      //   child: Text('Home', style: TextStyle(fontSize: 72)),
-      // );
-      body: Stack(
-        children: [
+      body: Column(
+        children: [         
           Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: searchBox(),
+          ),
+          // Container for the to-do list
+          Expanded(
             child: Container(
-              child: Column(children: [
-                searchBox(),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 50,
-                          bottom: 20,
-                        ),
-                        child: Text(
-                          'All To-Dos',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      for (ToDo todoo in _foundToDo)
-                        // for (ToDo todoo in _foundToDo.reversed) // reverse order list when new item added
-                        ToDoItem(
-                          todo: todoo,
-                          onToDoChanged: _handleToDoChange,
-                          onDeleteItem: _deleteToDoItem,
-                        ),
-                    ],
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _foundToDo.length +
+                          (_foundToDo.where((todo) => todo.isDone).length ~/ 5),
+                      itemBuilder: (context, index) {
+                        if (index < _foundToDo.length) {
+                          final todo = _foundToDo[index];
+                          return ToDoItem(
+                            todo: todo,
+                            onToDoChanged: _handleToDoChange,
+                            onDeleteItem: _deleteToDoItem,
+                          );
+                        } else {
+                          // Display your specific image after every 5 ToDoItem with isDone
+                          if ((index - _foundToDo.length) % 5 == 0) {
+                            return Column(
+                              children: [
+                                Text(
+                                  'My Pet',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Complete more tasks to level up your pet! Your pet will level up after every 5 tasks completed.',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Level 2 - Rowlet',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Image.asset(
+                                  'assets/images/owl2.png', // Replace with your image path
+                                ),
+                              ],
+                            );
+                          }
+
+                          return SizedBox
+                              .shrink(); // Return an empty SizedBox for other cases
+                        }
+                      },
+                    ),
                   ),
-                )
-              ]),
+                ],
+              ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
+
+          // Container for "Add a new to-do item"
+          Container(
             child: Row(children: [
               Expanded(
                 child: Container(
                   margin: EdgeInsets.only(
-                    bottom: 20,
+                    bottom: 10,
                     right: 20,
                     left: 20,
                   ),
@@ -104,7 +132,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  bottom: 20,
+                  bottom: 10,
                   right: 20,
                 ),
                 child: ElevatedButton(
@@ -171,52 +199,39 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   Widget searchBox() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0.0, 0.0),
-            blurRadius: 10.0,
-            spreadRadius: 0.0,
+      color: Colors.white,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 0.0),
+              blurRadius: 10.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+        ),
+        child: TextField(
+          onChanged: (value) => _runFilter(value),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(0),
+            prefixIcon: Icon(
+              Icons.search,
+              color: tdBlack,
+              size: 20,
+            ),
+            prefixIconConstraints: BoxConstraints(
+              maxHeight: 20,
+              minWidth: 25,
+            ),
+            border: InputBorder.none,
+            hintText: 'Search',
+            hintStyle: TextStyle(color: tdGrey),
           ),
-        ],
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: tdShadow,
-        //     offset: const Offset(
-        //       5.0,
-        //       5.0,
-        //     ),
-        //     blurRadius: 6.0,
-        //     spreadRadius: 1.0,
-        //   ),
-        //   BoxShadow(
-        //     color: Colors.white,
-        //     offset: const Offset(0.0, 0.0),
-        //     blurRadius: 0.0,
-        //     spreadRadius: 0.0,
-        //   ),
-        // ],
-      ),
-      child: TextField(
-        onChanged: (value) => _runFilter(value),
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0),
-          prefixIcon: Icon(
-            Icons.search,
-            color: tdBlack,
-            size: 20,
-          ),
-          prefixIconConstraints: BoxConstraints(
-            maxHeight: 20,
-            minWidth: 25,
-          ),
-          border: InputBorder.none,
-          hintText: 'Search',
-          hintStyle: TextStyle(color: tdGrey),
         ),
       ),
     );

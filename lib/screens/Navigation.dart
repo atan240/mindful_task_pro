@@ -19,7 +19,8 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   final screens = [
     Home(),
-    MyLists(),
+    // MyLists(),
+    Accomplishments(),
     MyTimer(),
     Calendar(),
   ];
@@ -127,7 +128,7 @@ class _MyAppState extends State<MyApp> {
               ),
               NavigationDestination(
                 icon: Icon(Icons.chat_bubble),
-                label: 'My Lists',
+                label: 'Progress',
               ),
               NavigationDestination(
                 icon: Icon(Icons.timer),

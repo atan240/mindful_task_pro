@@ -95,8 +95,7 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF96c24b),
-      appBar: AppBar(title: Text('Timer App')),
+      appBar: AppBar(title: Text('Timer')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
