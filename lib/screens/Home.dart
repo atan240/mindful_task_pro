@@ -27,7 +27,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     super.build(context);
     return Scaffold(
       body: Column(
-        children: [         
+        children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: searchBox(),
