@@ -53,6 +53,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         } else {
                           // Display your specific image after every 5 ToDoItem with isDone
                           if ((index - _foundToDo.length) % 5 == 0) {
+                            int level = (_foundToDo
+                                    .where((todo) => todo.isDone)
+                                    .length ~/
+                                5);
+
                             return Column(
                               children: [
                                 Text(
@@ -72,14 +77,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                                   ),
                                 ),
                                 Text(
-                                  'Level 2 - Rowlet',
+                                  // 'Level 1 - Rowlet',
+                                  'Level $level',
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Image.asset(
-                                  'assets/images/owl2.png', // Replace with your image path
+                                  // 'assets/images/owl1.png',
+                                  'assets/images/owl$level.png',
                                 ),
                               ],
                             );

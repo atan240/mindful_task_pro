@@ -36,7 +36,7 @@ class Accomplishments extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Level 2 - Hootree',
+            'Level 2 - Dartrix',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w500,
