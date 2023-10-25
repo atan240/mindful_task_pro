@@ -10,6 +10,7 @@ class MyTimer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: TimerPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
